@@ -2,8 +2,8 @@
 
 /**
 * @package wp plugin basic
-* Plugin Name: sample-wp-plugin-a
-* Description: El plugin mas basico.
+* Plugin Name: sample-wp-plugin-d
+* Description: Ejemplo para mostrar el admin menu. usando programacion funcional.
 */
 
 /*
@@ -36,7 +36,9 @@ if ( ! function_exists('add_action')) {
     echo 'Hey, you can\t access this file, you silly human!';
     die;
 }
-
+define("PAGE_SLUG",'xample_plugin');
+$admin_menu = plugin_dir_path(__FILE__) . 'includes/admin_menu.php';
+require_once $admin_menu;
 
 function plugin_basic_activate_plugin() {
     flush_rewrite_rules();
@@ -50,6 +52,10 @@ function plugin_basic_uninstall_plugin() {
 
 }
 
+function register( ) {
+    admin_menu_register();
+}
+register();
 register_activation_hook(__FILE__,'plugin_basic_activate_plugin');
 register_deactivation_hook(__FILE__,'plugin_basic_deactivate_plugin');
 register_uninstall_hook(__FILE__, 'plugin_basic_uninstall_plugin');
